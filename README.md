@@ -142,7 +142,67 @@ delid
 
 ![image](https://github.com/user-attachments/assets/77399e11-ab2b-4b7a-9f57-3ad4b5439e99)
 
+```
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+import scipy.stats as stats
+```
+```
+dataset=pd.read_csv("/content/heights.csv")
+dataset
+```
+
+![image](https://github.com/user-attachments/assets/810967d1-40bf-43d4-9405-e919e7187562)
+
+```
+df = pd.read_csv("heights.csv")
+q1 = df['height'].quantile(0.25)
+q2 = df['height'].quantile(0.5)
+q3 = df['height'].quantile(0.75)
+```
+```
+iqr = q3-q1
+iqr
+```
+
+![image](https://github.com/user-attachments/assets/355cdb16-038b-4c9a-8250-161e620f2509)
+
+```
+low = q1 - 1.5*iqr
+low
+```
+
+![image](https://github.com/user-attachments/assets/cc847847-540d-4c72-8802-b8cd5499ddc7)
+
+```
+high = q3 + 1.5*iqr
+high
+```
+
+![image](https://github.com/user-attachments/assets/7f0f29fd-7005-4943-9715-2b8c1ea4c0d8)
+
+```
+df1 = df[((df['height'] >=low)& (df['height'] <=high))]
+df1
+```
+
+![image](https://github.com/user-attachments/assets/8095fc52-21f2-4254-beb6-039c729a2cae)
+
+```
+z = np.abs(stats.zscore(df['height']))
+z
+```
+
+![image](https://github.com/user-attachments/assets/be18dbb1-5f61-4831-96dd-f9b2b08b119c)
+
+```
+df1 = df[z<3]
+df1
+```
+
+![image](https://github.com/user-attachments/assets/48ebe975-18f9-421a-bd10-390b82aea7b5)
 
 
-## Result
+# Result
 Thus we have cleaned the data and removed the outliers by detection using IQR and Z-score method.
